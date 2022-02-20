@@ -33,8 +33,6 @@ function SearchForServer(Settings, Page, RetryCount)
 	for _, Server in pairs(PlaceData.data) do
 		if Server.id == game.JobId then continue end
 		if CurrentSave.Servers[Server.id] then continue end
-
-		print(Server.maxPlayers)
 		
 		local MaxPlayers = Settings.EmptySlots and math.clamp(tonumber(Server.maxPlayers) - Settings.EmptySlots + 1, 1, math.huge) or tonumber(Server.maxPlayers)
 

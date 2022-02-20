@@ -5,7 +5,7 @@ local TeleportService = game:GetService("TeleportService")
 local SaveSystem = loadstring(game:HttpGet("https://dumpz.org/cBnSWwMc8sp8/text/"))()
 
 
---// Variables
+--//Variables
 local LP = Players.LocalPlayer
 local CurrentSave = SaveSystem.LoadTableFromFile("ServersHopped") or {
 	Servers = {},

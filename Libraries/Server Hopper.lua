@@ -67,6 +67,7 @@ return function(SearchSettings)
 	}
 
 	local TimePassed = math.abs(GetTime() - CurrentSave.Time)
+	local TeleportFailedEvent
 
 	if TimePassed > SearchSettings.ClearTime then
 		table.clear(CurrentSave.Servers)
@@ -81,7 +82,9 @@ return function(SearchSettings)
 		if not NewServer then 
 			warn("Couldn't find a server with the required parameters.")
 
-			break 
+			TeleportFailedEvent:Disconnect()
+
+			return
 		end
 
 		task.spawn(function()
@@ -96,7 +99,7 @@ return function(SearchSettings)
 
 	local LastServer = Teleport()
 	
-	TeleportService.TeleportInitFailed:Connect(function()
+	TeleportFailedEvent = TeleportService.TeleportInitFailed:Connect(function()
 		if LastServer then
 			CurrentSave.Servers[LastServer] = nil
 		end

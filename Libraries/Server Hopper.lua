@@ -100,6 +100,8 @@ return function(SearchSettings)
 	local LastServer = Teleport()
 	
 	TeleportFailedEvent = TeleportService.TeleportInitFailed:Connect(function()
+		warn("Failed!")
+			
 		if LastServer then
 			CurrentSave.Servers[LastServer] = nil
 		end

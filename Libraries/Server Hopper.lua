@@ -21,7 +21,6 @@ end
 
 function SearchForServer(Settings, Page, RetryCount)
 	RetryCount = RetryCount or 0
-	Settings = Settings or {}
 
 	local URL = string.format("https://games.roblox.com/v1/games/%i/servers/Public?sortOrder=Asc&limit=100", game.PlaceId)
 
@@ -60,16 +59,20 @@ end
 
 
 --//Script
-local TimePassed = math.abs(GetTime() - CurrentSave.Time)
-
-if TimePassed > SearchSettings.ClearTime then
-	table.clear(CurrentSave.Servers)
-	CurrentSave.Time = GetTime()
-
-	SaveSystem.SaveTableToFile("ServersHopped", CurrentSave)
-end
-
 return function(SearchSettings)
+	SearchSettings = SearchSettings or {
+		ClearTime = 5
+	}
+
+	local TimePassed = math.abs(GetTime() - CurrentSave.Time)
+
+	if TimePassed > SearchSettings.ClearTime then
+		table.clear(CurrentSave.Servers)
+		CurrentSave.Time = GetTime()
+
+		SaveSystem.SaveTableToFile("ServersHopped", CurrentSave)
+	end
+
 	while true do
 		local NewServer = SearchForServer(SearchSettings, LastPage)
 

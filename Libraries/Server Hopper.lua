@@ -59,6 +59,25 @@ function SearchForServer(Settings, Page, RetryCount)
 	end
 end
 
+function Teleport()
+	local NewServer = SearchForServer(SearchSettings, LastPage)
+
+	if not NewServer then 
+		warn("Couldn't find a server with the required parameters.")
+
+		break 
+	end
+
+	task.spawn(function()
+		CurrentSave.Servers[NewServer] = true
+		SaveSystem.SaveTableToFile("ServersHopped", CurrentSave)
+	end)
+
+	TeleportService:TeleportToPlaceInstance(game.PlaceId, NewServer, LP)
+
+	return NewServer
+end
+
 
 --//Script
 return function(SearchSettings)
@@ -75,22 +94,13 @@ return function(SearchSettings)
 		SaveSystem.SaveTableToFile("ServersHopped", CurrentSave)
 	end
 
-	while true do
-		local NewServer = SearchForServer(SearchSettings, LastPage)
-
-		if not NewServer then 
-			warn("Couldn't find a server with the required parameters.")
-
-			break 
+	local LastServer = Teleport()
+	
+	TeleportService.TeleportInitFailed:Connect(function()
+		if LastServer then
+			CurrentSave.Servers[LastServer] = nil
 		end
 
-		task.spawn(function()
-			CurrentSave.Servers[NewServer] = true
-			SaveSystem.SaveTableToFile("ServersHopped", CurrentSave)
-		end)
-
-		TeleportService:TeleportToPlaceInstance(game.PlaceId, NewServer, LP)
-
-		task.wait(2)
-	end
+		LastServer = Teleport()
+	end)
 end

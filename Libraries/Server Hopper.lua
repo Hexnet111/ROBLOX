@@ -31,9 +31,11 @@ function SearchForServer(Settings, Page, RetryCount)
 	local PlaceData = HttpService:JSONDecode(game:HttpGet(URL))
 
 	for _, Server in pairs(PlaceData.data) do
+		if not Server.playing then continue end
+
 		if Server.id == game.JobId then continue end
 		if CurrentSave.Servers[Server.id] then continue end
-		
+
 		local MaxPlayers = Settings.EmptySlots and math.clamp(tonumber(Server.maxPlayers) - Settings.EmptySlots + 1, 1, math.huge) or tonumber(Server.maxPlayers)
 
 		if tonumber(Server.playing) >= MaxPlayers then continue end

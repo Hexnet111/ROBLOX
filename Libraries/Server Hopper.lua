@@ -38,7 +38,7 @@ function SearchForServer(Settings, Page, RetryCount)
 		local MaxPlayers = Settings.EmptySlots and math.clamp(tonumber(Server.maxPlayers) - Settings.EmptySlots + 1, 1, math.huge) or tonumber(Server.maxPlayers)
 
 		if tonumber(Server.playing) >= MaxPlayers then continue end
-		if Settings.MinimumPing and tonumber(Server.ping) > Settings.MinimumPing then continue end
+		if Server.ping and Settings.MinimumPing and tonumber(Server.ping) > Settings.MinimumPing then continue end
 
 		warn("ID:", Server.id, "Players:", Server.playing, "Ping:", Server.ping)
 

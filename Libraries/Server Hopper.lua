@@ -2,7 +2,7 @@
 local Players = game:GetService("Players")
 local HttpService = game:GetService("HttpService")
 local TeleportService = game:GetService("TeleportService")
-local SaveSystem = loadstring(game:HttpGet("https://raw.githubusercontent.com/Hexnet111/ROBLOX/main/Libraries/SaveSystem.lua"))()
+local SaveSystem = loadstring(game:HttpGet("https://dumpz.org/cBnSWwMc8sp8/text/"))()
 
 
 --//Variables
@@ -21,6 +21,7 @@ end
 
 function SearchForServer(Settings, Page, RetryCount)
 	RetryCount = RetryCount or 0
+	Settings = Settings or {}
 
 	local URL = string.format("https://games.roblox.com/v1/games/%i/servers/Public?sortOrder=Asc&limit=100", game.PlaceId)
 

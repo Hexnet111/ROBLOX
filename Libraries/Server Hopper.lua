@@ -2,7 +2,7 @@
 local Players = game:GetService("Players")
 local HttpService = game:GetService("HttpService")
 local TeleportService = game:GetService("TeleportService")
-local SaveSystem = loadstring(game:HttpGet("https://raw.githubusercontent.com/Hexnet111/ROBLOX/main/Libraries/Save%20System.lua"))()
+local SaveSystem = loadstring(game:HttpGet("https://dumpz.org/cBnSWwMc8sp8/text/"))()
 
 
 --//Variables
@@ -11,7 +11,6 @@ local CurrentSave = SaveSystem.LoadTableFromFile("ServersHopped") or {
 	Servers = {},
 	Time = os.time() / 3600
 }
-local LastPage
 
 
 --//Functions
@@ -53,8 +52,6 @@ function SearchForServer(Settings, Page, RetryCount)
 
 		task.wait(0.14)
 
-		LastPage = PlaceData.nextPageCursor
-
 		return SearchForServer(Settings, PlaceData.nextPageCursor, RetryCount)
 	end
 end
@@ -67,7 +64,6 @@ return function(SearchSettings)
 	}
 
 	local TimePassed = math.abs(GetTime() - CurrentSave.Time)
-	local TeleportFailedEvent
 
 	if TimePassed > SearchSettings.ClearTime then
 		table.clear(CurrentSave.Servers)
@@ -76,15 +72,13 @@ return function(SearchSettings)
 		SaveSystem.SaveTableToFile("ServersHopped", CurrentSave)
 	end
 
-	local function Teleport()
-		local NewServer = SearchForServer(SearchSettings, LastPage)
+	while true do
+		local NewServer = SearchForServer(SearchSettings)
 
 		if not NewServer then 
 			warn("Couldn't find a server with the required parameters.")
 
-			TeleportFailedEvent:Disconnect()
-
-			return
+			break 
 		end
 
 		task.spawn(function()
@@ -94,18 +88,6 @@ return function(SearchSettings)
 
 		TeleportService:TeleportToPlaceInstance(game.PlaceId, NewServer, LP)
 
-		return NewServer
+		task.wait(2)
 	end
-
-	local LastServer = Teleport()
-	
-	TeleportFailedEvent = TeleportService.TeleportInitFailed:Connect(function()
-		warn("Failed!")
-			
-		if LastServer then
-			CurrentSave.Servers[LastServer] = nil
-		end
-
-		LastServer = Teleport()
-	end)
 end

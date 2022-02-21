@@ -1,4 +1,5 @@
 --Note: Don't judge me. I was bored and I had nothing to do, so I decided to remake GetMouse using UserInputService.
+--Also this is not an exact remake, so expect some differences.
 
 --//Services
 local Camera = workspace.CurrentCamera

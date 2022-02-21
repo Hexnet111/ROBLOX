@@ -5,7 +5,6 @@ local HttpService = game:GetService("HttpService")
 --//Variables
 local genv = {}
 
-
 --Optimization
 local type_of = typeof
 local table_find = table.find or function(Table,Value)

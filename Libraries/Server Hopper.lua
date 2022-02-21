@@ -2,7 +2,7 @@
 local Players = game:GetService("Players")
 local HttpService = game:GetService("HttpService")
 local TeleportService = game:GetService("TeleportService")
-local SaveSystem = loadstring(game:HttpGet("https://dumpz.org/cBnSWwMc8sp8/text/"))()
+local SaveSystem = loadstring(game:HttpGet("https://raw.githubusercontent.com/Hexnet111/ROBLOX/main/Libraries/Save%20System.lua"))()
 
 
 --//Variables

@@ -23,6 +23,10 @@ local CurrentSave = SaveSystem.LoadTableFromFile("KaigakuFinder") or {
 	Enabled = false
 }
 
+local HopSettings = {
+	ClearTime = 0.333
+}
+
 
 --//Functions
 function Enable()
@@ -56,13 +60,21 @@ function FindKaigaku()
 
 	local Kaigaku = workspace:FindFirstChild("Kaigaku")
 
-	if Kaigaku and Kaigaku:FindFirstChildWhichIsA("Model") then
+	if Kaigaku then
+		print(Kaigaku, Kaigaku:FindFirstChildWhichIsA("Model"))
+	end
+
+	if Kaigaku and Kaigaku:FindFirstChildWhichIsA("Model") and Kaigaku.Health.Value >= 250 then
 		Notify()
 		Disable()
+
+		task.delay(5, function()
+			if not LP.Character or not LP.Character:FindFirstChild("Health") then
+				HopServer(HopSettings)
+			end
+		end)
 	else
-		HopServer({
-			ClearTime = 0.333
-		})
+		HopServer(HopSettings)
 	end
 end
 

@@ -60,10 +60,6 @@ function FindKaigaku()
 
 	local Kaigaku = workspace:FindFirstChild("Kaigaku")
 
-	if Kaigaku then
-		print(Kaigaku, Kaigaku:FindFirstChildWhichIsA("Model"))
-	end
-
 	if Kaigaku and Kaigaku:FindFirstChildWhichIsA("Model") and Kaigaku.Health.Value >= 250 then
 		Notify()
 		Disable()

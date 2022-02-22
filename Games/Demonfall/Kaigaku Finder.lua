@@ -61,7 +61,6 @@ function FindKaigaku()
 		Disable()
 	else
 		HopServer({
-			EmptySlots = 2,
 			ClearTime = 0.333
 		})
 	end

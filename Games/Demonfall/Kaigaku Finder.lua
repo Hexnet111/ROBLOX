@@ -66,6 +66,7 @@ function FindKaigaku()
 
 		task.delay(5, function()
 			if not LP.Character or not LP.Character:FindFirstChild("Health") then
+				Enable()
 				HopServer(HopSettings)
 			end
 		end)

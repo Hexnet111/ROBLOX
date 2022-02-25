@@ -64,7 +64,7 @@ function FindKaigaku()
 		Notify()
 		Disable()
 
-		task.delay(5, function()
+		task.delay(8, function()
 			if not LP.Character or not LP.Character:FindFirstChildWhichIsA("NumberValue") then
 				Enable()
 				HopServer(HopSettings)

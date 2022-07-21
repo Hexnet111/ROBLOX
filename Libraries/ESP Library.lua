@@ -66,7 +66,7 @@ end
 function Module:DescendantCheck(MainParent, ObjectData, CustomCheck)
 	AddConnection(MainParent.DescendantAdded:Connect(function(Object)
 		if CustomCheck and typeof(CustomCheck) == "function" and CustomCheck(Object, ObjectData) or Object.Name == ObjectData.Name and Object.ClassName == ObjectData.ClassName then
-			Module:ESPObject(Object, ObjectData.CustomName or Object.Name, GetObjectColor(Object))
+			Module:ESPObject(Object, ObjectData.CustomName or Object.Name, ObjectData.CustomColor or GetObjectColor(Object))
 		end
 	end))
 end
@@ -74,7 +74,7 @@ end
 function Module:ChildCheck(MainParent, ObjectData, CustomCheck)
 	AddConnection(MainParent.ChildAdded:Connect(function(Object)
 		if CustomCheck and typeof(CustomCheck) == "function" and CustomCheck(Object, ObjectData) or Object.Name == ObjectData.Name and Object.ClassName == ObjectData.ClassName then
-			Module:ESPObject(Object, ObjectData.CustomName or Object.Name, GetObjectColor(Object))
+			Module:ESPObject(Object, ObjectData.CustomName or Object.Name, ObjectData.CustomColor or GetObjectColor(Object))
 		end
 	end))
 end
@@ -146,6 +146,6 @@ return function(NewSettings)
 	if Settings.AntiAFK then
 		Module:ActivateAntiAFK()
 	end
-	
+
 	return Module
 end

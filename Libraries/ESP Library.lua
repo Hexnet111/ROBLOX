@@ -23,6 +23,7 @@
 
 		DecendantCheck or ChildCheck:
 			Module:DescendantCheck(Where to search, ObjectData, CustomFuncs)
+			Module:ChildCheck(Where to search, ObjectData, CustomFuncs)
 
 			(Note: it's not required to use these functions, they're just there as a quick way to test things.)
 ]]

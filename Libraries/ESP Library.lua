@@ -20,6 +20,16 @@
 				Useful when just the Name and the Classname are not enough.
 				Needs to return a true when the correct object is found.
 
+			Notify:
+				An option to play a sound whenever an object spawns.
+				If the table is not included, it will be set to disabled by default.
+
+				{
+					Enabled = true,
+					SoundId = "rbxassetid://0" (Custom sounds can be set. If not set the default will be used.)
+					Volume = 1 (Kinda explains itself lol)
+				}
+
 
 		DecendantCheck or ChildCheck:
 			Module:DescendantCheck(Where to search, ObjectData, CustomFuncs)
@@ -33,6 +43,7 @@
 local Players = game:GetService("Players")
 local CoreGui = game:GetService("CoreGui")
 local UserInputService = game:GetService("UserInputService")
+local Debris = game:GetService("Debris")
 
 
 --//Variables
@@ -65,7 +76,19 @@ function RemoveAllConnections()
 	table.clear(Connections)
 end
 
-function GetObjectColor(Object)
+
+--//Functions
+function Module:StopScript()
+	for Object, _ in pairs(Pickables) do
+		Module:RemoveESP(Object)
+	end
+
+	RemoveAllConnections()
+
+	print("ESP Library Stopped!")
+end
+
+function Module:GetObjectColor(Object)
 	if Object:IsA("BasePart") then
 		return Object.Color
 	elseif Object:IsA("Model") then
@@ -87,24 +110,16 @@ function GetObjectColor(Object)
 	end
 end
 
-
---//Functions
-function Module:StopScript()
-	for Object, _ in pairs(Pickables) do
-		Module:RemoveESP(Object)
-	end
-
-	RemoveAllConnections()
-
-	print("ESP Library Stopped!")
-end
-
 function Module:DescendantCheck(MainParent, ObjectData, CustomFuncs)
  	CustomFuncs = CustomFuncs or {}
 
 	local function ObjectAdded(Object)
 		if CustomFuncs.CustomCheck and typeof(CustomFuncs.CustomCheck) == "function" and CustomFuncs.CustomCheck(Object, ObjectData) or Object.Name == ObjectData.Name and Object.ClassName == ObjectData.ClassName then
-			Module:ESPObject(Object, ObjectData.CustomName or Object.Name, ObjectData.CustomColor or GetObjectColor(Object), CustomFuncs.CustomRemoval)
+			Module:ESPObject(Object, ObjectData.CustomName or Object.Name, ObjectData.CustomColor or Module:GetObjectColor(Object), CustomFuncs.CustomRemoval)
+		
+			if CustomFuncs.Notify and CustomFuncs.Notify.Enabled then
+				Module:Notify(CustomFuncs.Notify)
+			end
 		end
 	end
 
@@ -120,7 +135,11 @@ function Module:ChildCheck(MainParent, ObjectData, CustomFuncs)
 
 	local function ObjectAdded(Object)
 		if CustomFuncs.CustomCheck and typeof(CustomFuncs.CustomCheck) == "function" and CustomFuncs.CustomCheck(Object, ObjectData) or Object.Name == ObjectData.Name and Object.ClassName == ObjectData.ClassName then
-			Module:ESPObject(Object, ObjectData.CustomName or Object.Name, ObjectData.CustomColor or GetObjectColor(Object), CustomFuncs.CustomRemoval)
+			Module:ESPObject(Object, ObjectData.CustomName or Object.Name, ObjectData.CustomColor or Module:GetObjectColor(Object), CustomFuncs.CustomRemoval)
+		
+			if CustomFuncs.Notify and CustomFuncs.Notify.Enabled then
+				Module:Notify(CustomFuncs.Notify)
+			end
 		end
 	end
 
@@ -155,6 +174,15 @@ function Module:ActivateAntiAFK()
 
         _G.AntiAFKActivated = true
     end
+end
+
+function Module:Notify(NotificationData)
+	local Notification = Instance.new("Sound",CoreGui)
+    Notification.SoundId = NotificationData.SoundId or "rbxassetid://232127604"
+    Notification.Volume = NotificationData.Volume or 1
+    Notification:Play()
+
+    Debris:AddItem(Notification, Notification.TimeLength+2)
 end
 
 function Module:ESPObject(Object, Name, Color, CustomRemoval)

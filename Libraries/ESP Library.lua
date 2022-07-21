@@ -1,5 +1,14 @@
 --[[
 	How to use:
+		Optional Settings:
+			When loading the script you have an option to give the intial function a settings table.
+			In the settings table you can set to activate the anti afk, or change the stopkey like so:
+
+			{
+				StopKEY = Enum.KeyCode.Comma (This will be comma by default even if no settings are given.)
+				AntiAFK = true (false by default.)
+			}
+
 		
 		ObjectData Example:
 			{

@@ -64,19 +64,31 @@ function Module:StopScript()
 end
 
 function Module:DescendantCheck(MainParent, ObjectData, CustomCheck)
-	AddConnection(MainParent.DescendantAdded:Connect(function(Object)
+	local function ObjectAdded(Object)
 		if CustomCheck and typeof(CustomCheck) == "function" and CustomCheck(Object, ObjectData) or Object.Name == ObjectData.Name and Object.ClassName == ObjectData.ClassName then
 			Module:ESPObject(Object, ObjectData.CustomName or Object.Name, ObjectData.CustomColor or GetObjectColor(Object))
 		end
-	end))
+	end
+
+	for _, Object in pairs(MainParent:GetDescendants()) do
+		ObjectAdded(Object)
+	end
+
+	AddConnection(MainParent.DescendantAdded:Connect(ObjectAdded))
 end
 
 function Module:ChildCheck(MainParent, ObjectData, CustomCheck)
-	AddConnection(MainParent.ChildAdded:Connect(function(Object)
+	local function ObjectAdded(Object)
 		if CustomCheck and typeof(CustomCheck) == "function" and CustomCheck(Object, ObjectData) or Object.Name == ObjectData.Name and Object.ClassName == ObjectData.ClassName then
 			Module:ESPObject(Object, ObjectData.CustomName or Object.Name, ObjectData.CustomColor or GetObjectColor(Object))
 		end
-	end))
+	end
+
+	for _, Object in pairs(MainParent:GetChildren()) do
+		ObjectAdded(Object)
+	end
+
+	AddConnection(MainParent.ChildAdded:Connect(ObjectAdded))
 end
 
 function Module:ActivateAntiAFK()

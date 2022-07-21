@@ -146,5 +146,6 @@ return function(NewSettings)
 	if Settings.AntiAFK then
 		Module:ActivateAntiAFK()
 	end
+	
 	return Module
 end

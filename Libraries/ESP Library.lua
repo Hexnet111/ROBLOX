@@ -215,8 +215,6 @@ function Module:ESPObject(Object, Name, Color, CustomRemoval)
 
 	    	Connection = AddConnection(Object:GetPropertyChangedSignal("Parent"):Connect(function()
 	    		if Object.Parent == nil then
-					print("Object Removed")
-
 		    		Module:RemoveESP(Object)
 		    		Connection:Disconnect()
 	    		end

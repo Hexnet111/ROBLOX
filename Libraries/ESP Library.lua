@@ -195,17 +195,17 @@ function Module:Notify(NotificationData)
 end
 
 function Module:ESPObject(Object, Name, Color, CustomRemoval)
-    local Clone = BillboardGui:Clone()
-    Clone.Parent = CoreGui
-    Clone.Adornee = Object
-    Clone.TextLabel.Text = Name
-    Clone.Size = UDim2.new(8, #Name * 4, 3, #Name * 2)
+	local Clone = BillboardGui:Clone()
+	Clone.Parent = CoreGui
+	Clone.Adornee = Object
+	Clone.TextLabel.Text = Name
+	Clone.Size = UDim2.new(8, #Name * 4, 3, #Name * 2)
 
-    if Color then
-        Clone.TextLabel.TextColor3 = Color
-    end
+	if Color then
+		Clone.TextLabel.TextColor3 = Color
+	end
 
-    Pickables[Object] = Clone
+	Pickables[Object] = Clone
 
 	if CustomRemoval then
 		AddConnection(CustomRemoval(Object))

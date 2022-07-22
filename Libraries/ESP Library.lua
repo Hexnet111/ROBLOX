@@ -160,38 +160,38 @@ function Module:ChildCheck(MainParent, ObjectData, CustomFuncs)
 end
 
 function Module:ActivateAntiAFK()
-    if _G.AntiAFKActivated then return end
+	if _G.AntiAFKActivated then return end
 
-    local GC = getconnections or get_signal_cons
+	local GC = getconnections or get_signal_cons
 
-    if GC then
-        for i,v in pairs(GC(Players.LocalPlayer.Idled)) do
-            if v["Disable"] then
-                v["Disable"](v)
-            elseif v["Disconnect"] then
-                v["Disconnect"](v)
-            end
-        end
+	if GC then
+		for i,v in pairs(GC(Players.LocalPlayer.Idled)) do
+			if v["Disable"] then
+				v["Disable"](v)
+			elseif v["Disconnect"] then
+				v["Disconnect"](v)
+			end
+		end
 
-        for i,v in pairs(GC(UserInputService.WindowFocusReleased)) do
-            if v["Disable"] then
-                v["Disable"](v)
-            end
-        end
+		for i,v in pairs(GC(UserInputService.WindowFocusReleased)) do
+			if v["Disable"] then
+				v["Disable"](v)
+			end
+		end
 
-        print("Anti AFK Activated!")
+		print("Anti AFK Activated!")
 
-        _G.AntiAFKActivated = true
-    end
+		_G.AntiAFKActivated = true
+	end
 end
 
 function Module:Notify(NotificationData)
 	local Notification = Instance.new("Sound",CoreGui)
-    Notification.SoundId = NotificationData.SoundId or "rbxassetid://232127604"
-    Notification.Volume = NotificationData.Volume or 1
-    Notification:Play()
+	Notification.SoundId = NotificationData.SoundId or "rbxassetid://232127604"
+	Notification.Volume = NotificationData.Volume or 1
+	Notification:Play()
 
-    Debris:AddItem(Notification, Notification.TimeLength+2)
+	Debris:AddItem(Notification, Notification.TimeLength+2)
 end
 
 function Module:ESPObject(Object, Name, Color, CustomRemoval)
@@ -212,20 +212,20 @@ function Module:ESPObject(Object, Name, Color, CustomRemoval)
 	else
 		local Connection 
 
-    	Connection = AddConnection(Object:GetPropertyChangedSignal("Parent"):Connect(function()
-    		if Object.Parent == nil then
-	    		Module:RemoveESP(Object)
-	    		Connection:Disconnect()
-    		end
-    	end))
+		Connection = AddConnection(Object:GetPropertyChangedSignal("Parent"):Connect(function()
+			if Object.Parent == nil then
+				Module:RemoveESP(Object)
+				Connection:Disconnect()
+			end
+		end))
 	end
 end
 
 function Module:RemoveESP(Object)
-    if not Pickables[Object] then return end
+	if not Pickables[Object] then return end
 
-    Pickables[Object]:Destroy()
-    Pickables[Object] = nil
+	Pickables[Object]:Destroy()
+	Pickables[Object] = nil
 end
 
 

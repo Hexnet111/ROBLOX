@@ -207,20 +207,18 @@ function Module:ESPObject(Object, Name, Color, CustomRemoval)
 
     Pickables[Object] = Clone
 
-    do
-    	if CustomRemoval then
-    		AddConnection(CustomRemoval(Object))
-    	else
-    		local Connection 
+	if CustomRemoval then
+		AddConnection(CustomRemoval(Object))
+	else
+		local Connection 
 
-	    	Connection = AddConnection(Object:GetPropertyChangedSignal("Parent"):Connect(function()
-	    		if Object.Parent == nil then
-		    		Module:RemoveESP(Object)
-		    		Connection:Disconnect()
-	    		end
-	    	end))
-    	end
-    end
+    	Connection = AddConnection(Object:GetPropertyChangedSignal("Parent"):Connect(function()
+    		if Object.Parent == nil then
+	    		Module:RemoveESP(Object)
+	    		Connection:Disconnect()
+    		end
+    	end))
+	end
 end
 
 function Module:RemoveESP(Object)

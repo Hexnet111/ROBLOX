@@ -123,7 +123,7 @@ function Module:DescendantCheck(MainParent, ObjectData, CustomFuncs)
  	CustomFuncs = CustomFuncs or {}
 
 	local function ObjectAdded(Object)
-		if CustomFuncs.CustomCheck and typeof(CustomFuncs.CustomCheck) == "function" and CustomFuncs.CustomCheck(Object, ObjectData) or Object.Name == ObjectData.Name and Object.ClassName == ObjectData.ClassName then
+		if CustomFuncs.CustomCheck and typeof(CustomFuncs.CustomCheck) == "function" and CustomFuncs.CustomCheck(Object) or Object.Name == ObjectData.Name and Object.ClassName == ObjectData.ClassName then
 			Module:ESPObject(Object, ObjectData.CustomName or Object.Name, ObjectData.CustomColor or Module:GetObjectColor(Object), CustomFuncs.CustomRemoval)
 		
 			if CustomFuncs.Notify and CustomFuncs.Notify.Enabled then
@@ -143,7 +143,7 @@ function Module:ChildCheck(MainParent, ObjectData, CustomFuncs)
 	CustomFuncs = CustomFuncs or {}
 
 	local function ObjectAdded(Object)
-		if CustomFuncs.CustomCheck and typeof(CustomFuncs.CustomCheck) == "function" and CustomFuncs.CustomCheck(Object, ObjectData) or Object.Name == ObjectData.Name and Object.ClassName == ObjectData.ClassName then
+		if CustomFuncs.CustomCheck and typeof(CustomFuncs.CustomCheck) == "function" and CustomFuncs.CustomCheck(Object) or Object.Name == ObjectData.Name and Object.ClassName == ObjectData.ClassName then
 			Module:ESPObject(Object, ObjectData.CustomName or Object.Name, ObjectData.CustomColor or Module:GetObjectColor(Object), CustomFuncs.CustomRemoval)
 		
 			if CustomFuncs.Notify and CustomFuncs.Notify.Enabled then

@@ -35,9 +35,10 @@ function SearchForServer(Settings, Page, RetryCount)
 		if Server.id == game.JobId then continue end
 		if CurrentSave.Servers[Server.id] then continue end
 
-		local MaxPlayers = Settings.EmptySlots and math.clamp(tonumber(Server.maxPlayers) - Settings.EmptySlots + 1, 1, math.huge) or tonumber(Server.maxPlayers)
+		local ActualMaxPlayers = tonumber(Server.maxPlayers)
+		local MaxPlayers = Settings.EmptySlots and math.clamp(ActualMaxPlayers - Settings.EmptySlots + 1, 1, math.huge) or ActualMaxPlayers
 
-		if tonumber(Server.playing) >= MaxPlayers then continue end
+		if MaxPlayers == ActualMaxPlayers - 1 and tonumber(Server.playing) >= MaxPlayers or tonumber(Server.playing) > MaxPlayers then continue end
 		if Server.ping and Settings.MinimumPing and tonumber(Server.ping) > Settings.MinimumPing then continue end
 
 		warn("ID:", Server.id, "Players:", Server.playing, "Ping:", Server.ping)

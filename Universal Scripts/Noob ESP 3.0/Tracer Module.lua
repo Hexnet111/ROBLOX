@@ -17,7 +17,7 @@ function Module.new(Parent)
 	self.Line.Size = UDim2.new()
 	self.Line.Name = "Line"
 	self.Line.BorderSizePixel = 0
-	self.Line.Zindex = -1
+	self.Line.ZIndex = -1
 	
 	self.Width = 3
 

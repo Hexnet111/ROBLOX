@@ -22,9 +22,9 @@ local CustomKeyNames = {
 	Slash = "/",
 	BackSlash = [[\]]
 	Period = ".",
-	Comma = ","
+	Comma = ",",
 	Equals = "=",
-	Minus = "-",
+	Minus = "-"
 }
 
 local FadeTweenInfo = TweenInfo.new(

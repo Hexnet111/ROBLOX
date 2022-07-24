@@ -14,7 +14,17 @@ local UIEvents = {}
 
 local Connections = {}
 local CustomKeyNames = {
-	Backquote = "`";
+	Backquote = "`",
+	RightBracket = "]",
+	LeftBracket = "[",
+	Quote = "'",
+	Semicolon = ";",
+	Slash = "/",
+	BackSlash = [[\]]
+	Period = ".",
+	Comma = ","
+	Equals = "=",
+	Minus = "-",
 }
 
 local FadeTweenInfo = TweenInfo.new(
@@ -225,7 +235,7 @@ function Module.newKeybind(Category, Parent, DefaultKey)
 	Button.BackgroundTransparency = 1.000
 	Button.Size = UDim2.new(1, 0, 1, 0)
 	Button.Font = Enum.Font.RobotoMono
-	Button.Text = DefaultKey.Name
+	Button.Text = CustomKeyNames[DefaultKey.Name] or DefaultKey.Name
 	Button.TextColor3 = Color3.fromRGB(255, 255, 255)
 	Button.TextScaled = true
 

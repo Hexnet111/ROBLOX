@@ -13,6 +13,9 @@ local LayoutOrder = 0
 local UIEvents = {}
 
 local Connections = {}
+local CustomKeyNames = {
+	Backquote = "`";
+}
 
 local FadeTweenInfo = TweenInfo.new(
 	0.2,
@@ -244,7 +247,10 @@ function Module.newKeybind(Category, Parent, DefaultKey)
 		end
 
 		CurrentKey = NewKey
-		Button.Text = NewKey.Name
+
+		local KeyName = CustomKeyNames[NewKey.Name] or NewKey.Name
+
+		Button.Text = KeyName
 
 		UIEvents[KeybindOption]:Fire(NewKey)
 	end)

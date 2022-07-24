@@ -49,7 +49,7 @@ MoveMouse.Modal = true
 MouseMove.Text = ""
 
 Screen.Name = "Screen"
-Screen.Parent = game.StarterGui.WIP
+Screen.Parent = NoobESP
 Screen.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 Screen.BackgroundTransparency = 1.000
 Screen.Position = UDim2.new(0, 0, 0, 36)

@@ -16,8 +16,9 @@ function Module.new(Parent)
 	self.Line.AnchorPoint = Vector2.new(0.5, 0.5)
 	self.Line.Size = UDim2.new()
 	self.Line.Name = "Line"
+	self.Line.BorderSizePixel = 0
 	
-	self.Width = 5
+	self.Width = 3
 
 	return self
 end

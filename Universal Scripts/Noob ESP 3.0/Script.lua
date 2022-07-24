@@ -1,4 +1,5 @@
 --//Services
+local CoreGui = game:GetService("CoreGui")
 local Players = game:GetService("Players")
 local UserInputService = game:GetService("UserInputService")
 local UILibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/Hexnet111/ROBLOX/main/Universal%20Scripts/Noob%20ESP%203.0/UI%20Library.lua"))()
@@ -6,6 +7,7 @@ local LineModule = loadstring(game:HttpGet("https://raw.githubusercontent.com/He
 
 
 --//GUI Creation
+local NoobESP = Instance.new("ScreenGui")
 local Background = Instance.new("Frame")
 local MoveMouse = Instance.new("TextButton")
 local Screen = Instance.new("Frame")
@@ -29,8 +31,13 @@ local Content = Instance.new("ScrollingFrame")
 local UIListLayout_2 = Instance.new("UIListLayout")
 local UIAspectRatioConstraint_5 = Instance.new("UIAspectRatioConstraint")
 
+NoobESP.Parent = CoreGui
+NoobESP.DisplayOrder = 999999999
+NoobESP.IgnoreGuiInset = true
+NoobESP.ResetOnSpawn = false
+
 Background.Name = "Background"
-Background.Parent = game.StarterGui.WIP
+Background.Parent = NoobESP
 Background.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 Background.BackgroundTransparency = 0.500
 Background.Size = UDim2.new(1, 0, 1, 0)

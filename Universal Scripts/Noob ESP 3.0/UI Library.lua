@@ -272,7 +272,7 @@ function Module.newKeybind(Category, Parent, DefaultKey)
 	}
 end
 
-function Module.newSlider(Category, Parent)
+function Module.newSlider(Category, Parent, DefaultFill)
 	if not Category then return end
 
 	Category = Categories[Category]
@@ -318,7 +318,7 @@ function Module.newSlider(Category, Parent)
 	Slider.Name = "Slider"
 	Slider.Parent = SliderBackground
 	Slider.BackgroundColor3 = Color3.fromRGB(240, 240, 240)
-	Slider.Size = UDim2.new(1, 0, 1, 0)
+	Slider.Size = UDim2.new(DefaultFill, 0, 1, 0)
 	Slider.BorderSizePixel = 0
 
 	UICorner_3.CornerRadius = UDim.new(0, 5)

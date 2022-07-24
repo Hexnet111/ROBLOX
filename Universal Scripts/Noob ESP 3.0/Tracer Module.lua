@@ -36,6 +36,12 @@ function Module:Update(Point1, Point2)
 	self.Line.Size = UDim2.fromOffset((Point1Vector - Point2Vector).Magnitude, self.Width)
 end
 
+function Module:Destroy()
+	self.Line:Destroy()
+	table.clear(self)
+	self = nil
+end
+
 
 --//Script
 return Module

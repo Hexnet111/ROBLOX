@@ -20,7 +20,7 @@ local CustomKeyNames = {
 	Quote = "'",
 	Semicolon = ";",
 	Slash = "/",
-	BackSlash = [[\]]
+	BackSlash = [[\]],
 	Period = ".",
 	Comma = ",",
 	Equals = "=",
